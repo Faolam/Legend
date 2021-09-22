@@ -1,5 +1,6 @@
 // Importações
 const { Bot_Info, Adm_Priv } = require("../config/config.json");
+const { Claras, Escuras } = require("../config/colors.json")
 
 // Execução do comando.
 module.exports = {
@@ -11,10 +12,10 @@ module.exports = {
         let command = args.shift().slice(Bot_Info.Defaut_Prefix.length).toLowerCase()
 
         command = bot.commands.get(command) || bot.commands.find(cmd => {
-            if(cmd.help.aliases.includes(command) === true) return cmd
+            if (cmd.help.aliases.includes(command) === true) return cmd
         })
 
-        if (command === undefined) return msg.channel.send("👋 Salve " + msg.author.toString() + " !\nNão fui capaz de reconhecer o comando `" + msg.content.slice(Bot_Info.Defaut_Prefix.length) + "`, tente-o de **outra** forma!") 
+        if (command === undefined) return msg.channel.send(":pepeJamSides: Salve " + msg.author.toString() + " !\nNão fui capaz de reconhecer o comando `" + msg.content.slice(Bot_Info.Defaut_Prefix.length) + "`, tente-o de **outra** forma!") 
 
         const perms = command.help.status
 
