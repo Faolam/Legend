@@ -1,0 +1,13 @@
+{
+    "Bot_Info": {
+        "Id": "890012000040681543",
+        "Token":"",
+        "Discriminator":"3389",
+        "Defaut_Prefix":"!"
+    },
+    "Owner_Info": {
+        "Owner_Name":"Pedrão",
+        "Owner_Discriminator":"2655",
+        "Owner_Id":""
+    }
+}
