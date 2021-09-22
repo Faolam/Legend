@@ -23,14 +23,15 @@ readdir(Events_Path, (err, archives) => {
             const module_found = require(Events_Path + `/${archive}`);
 
             try {
-                if(archive_name === "message") {
-                    bot.on("message", (msg) => module_found.run(bot, msg));
+                if (archive_name === "message-event") {
+                    console.log("| GOOD | '" + archive + "' foi executado com sucesso!")
+                    bot.on("messageCreate", msg => module_found.run(bot, msg));
                 }
                 if (archive_name === "commands-collector") {
                     bot.on("ready", () => module_found.run(bot));
                 }
-                else {
-                    bot.on(`${archive_name}`, (...prop) => module_found.run(bot, ...prop));
+                if (archive_name === "ready") {
+                    bot.on("ready", () => module_found.run(bot));
                 }
             } catch(e) {
                 console.log("| ERRO | Falha ao iniciar.")
