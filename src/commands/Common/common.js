@@ -1,6 +1,6 @@
 module.exports = {
-    run: () => {
-
+    run: (bot, msg, args) => {
+        msg.channel.send("esse é o comando common")
     },
     help: {
         name: "common",

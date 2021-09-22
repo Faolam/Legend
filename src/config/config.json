@@ -5,9 +5,12 @@
         "Discriminator":"3389",
         "Defaut_Prefix":"!"
     },
+    
     "Owner_Info": {
         "Owner_Name":"Pedrão",
         "Owner_Discriminator":"2655",
         "Owner_Id":"476373357756022787"
-    }
+    },
+
+    "Adm_Priv": ["383811100690350080", "476373357756022787"]
 }

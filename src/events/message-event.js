@@ -1,5 +1,5 @@
 // Importações
-const { Bot_Info } = require("../config/config.json")
+const { Bot_Info, Adm_Priv } = require("../config/config.json");
 
 // Execução do comando.
 module.exports = {
@@ -16,6 +16,20 @@ module.exports = {
 
         if (command === undefined) return msg.channel.send("👋 Salve " + msg.author.toString() + " !\nNão fui capaz de reconhecer o comando `" + msg.content.slice(Bot_Info.Defaut_Prefix.length) + "`, tente-o de **outra** forma!") 
 
-        msg.channel.send("Comando reconhecido '" + command.help.name + "'.")
+        const perms = command.help.status
+
+        if (perms == "admin") {
+            return (Adm_Priv.includes(msg.author.id) ? command.run(bot, msg, args) : msg.channel.send("✋ Infelizmente esse comando é restrito à categoria ***ADMINISTRADOR***").then(() => {
+                msg.react("❌")
+            }))
+        }
+        if (perms == "common") {
+            return command.run(bot, msg, args);
+        }
+        if (perms == "off") {
+            return msg.channel.send("```❌ Esse comando está temporariamente inativo devido a ocorrência de sua manutenção. É aconselhado aguardar a volta de seu funcionamento ou avisar a staff sobre essa ocasião.```");
+        } else {
+            return;
+        }
     }
 }

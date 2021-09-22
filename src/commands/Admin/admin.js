@@ -1,6 +1,6 @@
 module.exports = {
-    run: () => {
-
+    run: (bot, msg, args) => {
+        msg.channel.send("Esse é o comando admin")
     },
     help: {
         name: "admin",
