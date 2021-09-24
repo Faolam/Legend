@@ -1,7 +1,8 @@
 // Importações
+const DiscordJs = require("discord.js");
 const { Bot_Info, Adm_Priv } = require("../config/config.json");
-const { Claras, Escuras } = require("../config/colors.json")
-const { Estaticos, Animados } = require("../config/emojis.json")
+const { Claras, Escuras } = require("../config/colors.json");
+const { Estaticos, Animados } = require("../config/emojis.json");
 
 // Execução do comando.
 module.exports = {
@@ -16,12 +17,26 @@ module.exports = {
             if (cmd.help.aliases.includes(command) === true) return cmd
         })
 
-        if (command === undefined) return msg.channel.send(Animados.pepeJamSides + " Salve " + msg.author.toString() + " !\nNão fui capaz de reconhecer o comando `" + msg.content.slice(Bot_Info.Defaut_Prefix.length) + "`, tente-o de **outra** forma!") 
+        // Embeds
+        const a_embed = new DiscordJs.MessageEmbed()
+            .setColor(Claras.Vermelho)
+            .setDescription("```❌ Comando '" + msg.content.slice(Bot_Info.Defaut_Prefix.length) + "' não Reconhecido ❌```")
+        const b_embed = new DiscordJs.MessageEmbed()
+            .setColor(Claras.Amarelo)
+            .setDescription("```🔒 Comando Restrito a Administradores 🔒```")
+        const c_embed = new DiscordJs.MessageEmbed()
+            .setColor(Escuras.Laranja)
+            .setDescription("```🦺 Comando em Manutenção Temporária 🦺```")
+        // Embeds
+
+        if (command === undefined) return msg.channel.send({ embeds: [a_embed] }).then(() => {
+            msg.react("🤔")
+        })
 
         const perms = command.help.status
 
         if (perms == "admin") {
-            return (Adm_Priv.includes(msg.author.id) ? command.run(bot, msg, args) : msg.channel.send("✋ Infelizmente esse comando é restrito à categoria ***ADMINISTRADOR***").then(() => {
+            return (Adm_Priv.includes(msg.author.id) ? command.run(bot, msg, args) : msg.channel.send({ embeds: [b_embed] }).then(() => {
                 msg.react("❌")
             }))
         }
@@ -29,7 +44,7 @@ module.exports = {
             return command.run(bot, msg, args);
         }
         if (perms == "off") {
-            return msg.channel.send("```❌ Esse comando está temporariamente inativo devido a ocorrência de sua manutenção. É aconselhado aguardar a volta de seu funcionamento ou avisar a staff sobre essa ocasião.```");
+            return msg.channel.send({ embeds: [c_embed] });
         } else {
             return;
         }

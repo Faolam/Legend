@@ -3,6 +3,10 @@
 
     },
     "Animados": {
+        "offline": "<a:offline:890770112091672627>",
+        "online": "<a:online:890768437503209482>",
+        "Load": "<a:Load:830180639423987712>",
+        "info_neon": "<a:info_neon:890765367721472051>",
         "pepeJamSides": "<a:pepeJamSides:890361388982218823>"
     }
 }
