@@ -9,7 +9,7 @@ module.exports = {
         const a_embed = new MessageEmbed()
             .setAuthor(bot.user.username + " Admin Informations", bot.user.displayAvatarURL({dynamic: true, format: "png", size: 1024}))
             .setColor(Claras.Verde)
-            .setDescription("**--> Status : ** " + (bot.user.presence.status == "online" ? bot.user.presence.status.toUpperCase() + " " + Animados.online : bot.user.presence.status.toUpperCase() + " " + Animados.offline)+ "\n")
+            .setDescription("**Status : ** " + (bot.user.presence.status == "online" ? "`" + bot.user.presence.status.toUpperCase() + "` " + Animados.online : bot.user.presence.status.toUpperCase() + " " + Animados.offline)+ "\n**Latency : ** " + (Date.now() - msg.createdTimestamp)*(-1) + "ms")
             
         // console.log(bot.user.presence)
         msg.channel.send({ embeds: [a_embed] })
